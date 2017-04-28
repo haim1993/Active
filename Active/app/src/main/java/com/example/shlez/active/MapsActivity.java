@@ -1,7 +1,11 @@
 package com.example.shlez.active;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -25,7 +29,7 @@ import static com.google.android.gms.maps.UiSettings.*;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private final static int MY_PERMISSIONS_COURSE_LOCATION = 101;
+    private final static int MY_PERMISSIONS_FINE_LOCATION = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +56,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng telAviv = new LatLng(32.0853, 34.7818);
-        mMap.addMarker(new MarkerOptions().position(telAviv).title("Marker in Tel Aviv"));
-        CameraPosition target = CameraPosition.builder().target(telAviv).zoom(14).build();
-        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(telAviv));
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
+
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setRotateGesturesEnabled(false);
+                mMap.getUiSettings().setTiltGesturesEnabled(false);
+
+            LatLng myLocation = new LatLng(32.0853,34.7818);
+            CameraPosition target = CameraPosition.builder().target(myLocation).zoom(14).build();
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+
+//            LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//            LocationListener locationListener = new LocationListener() {
+//                public void onLocationChanged(Location location) {
+//
+//                    Toast.makeText(getApplicationContext(), "Your location is : (" + location.getLongitude() + "," + location.getLatitude() + ")", Toast.LENGTH_LONG).show();
+//                    LatLng myLocation = new LatLng(location.getLongitude(), location.getLatitude());
+//                    CameraPosition target = CameraPosition.builder().target(myLocation).zoom(14).build();
+//                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+//                }
+//
+//                @Override
+//                public void onStatusChanged(String provider, int status, Bundle extras) {}
+//
+//                @Override
+//                public void onProviderEnabled(String provider) {}
+//
+//                @Override
+//                public void onProviderDisabled(String provider) {}
+//            };
+//            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
 
         } else {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_COURSE_LOCATION);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_FINE_LOCATION);
         }
 
     }
@@ -71,9 +101,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
-            case MY_PERMISSIONS_COURSE_LOCATION:
+            case MY_PERMISSIONS_FINE_LOCATION:
                 if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         mMap.setMyLocationEnabled(true);
                     }
                 } else {
