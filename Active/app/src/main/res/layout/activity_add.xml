@@ -4,63 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shlez.active.AddActivity">
+    tools:context="com.example.shlez.active.MainActivity">
 
-    -
-
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:weightSum="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="1.0">
+
 
         <EditText
-            android:id="@+id/nameActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="how do you want to call your activity?"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="time"
-            android:text="when do you want your activity to be removed?"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/maxPeople"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:text="what's the maximum number of people you want to join you?"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/cost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:text="what's the cost?"
-            android:textAlignment="center" />
-
-        <Button
-            android:id="@+id/sendbutton"
+            android:id="@+id/editText4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="0dp"
-            android:text="make activity"
-            android:textAlignment="center"
-            android:visibility="visible" />
+            android:layout_marginTop="82dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Activity Name"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="89dp"
+            android:text="Add" />
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

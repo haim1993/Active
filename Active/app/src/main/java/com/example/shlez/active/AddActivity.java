@@ -6,7 +6,7 @@ import java.sql.Time;
  * Created by hilas_000 on 4/28/2017.
  */
 
-public class activity {
+public class AddActivity {
     public static int LastnumAct;
 
     private String name;
@@ -15,7 +15,7 @@ public class activity {
     private Time time;
     private int maxPeople;
 
-    public activity(String name, int numAct, int cost, Time time, int maxPeople) {
+    public AddActivity(String name, int numAct, int cost, Time time, int maxPeople) {
         this.name = name;
         this.numAct = numAct;
         this.cost = cost;
@@ -23,7 +23,7 @@ public class activity {
         this.maxPeople = maxPeople;
     }
 
-    public activity() {
+    public AddActivity() {
         this.name = null;
         this.numAct = LastnumAct+1;
         LastnumAct++;
